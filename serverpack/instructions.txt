@@ -1,0 +1,45 @@
+# Chris Hanly 04/06/2024
+# Instructions on setting up and getting the web server running on your device
+
+1. If it's not already installed, install NPM.
+	a. This varies between windows and MacOS. It's not hard- google and chatgpt will help.
+
+2. Accept your invitation to the mongodb atlas database (if you haven't done so already)
+
+3. Edit server.js line 11 (the connection string)
+	a. place 'mongodb+srv://<username>:<password>@application.dkdfsrp.mongodb.net/'
+		as the connection string
+
+4. Open terminal or powershell
+
+5. In the shell, make sure you're in the directory where server.js and stateModel.js are (serverpack)
+
+6. Then run these three commands in order
+	a. npm init -y
+	b. npm install express mongoose
+	c. npm start
+
+7. Read the console output. Try and make sure that the server was able to connect to MongoDB.
+	a. If it was able to do it, it will say so.
+
+8. You should now be able to make HTTP posts against the server. 
+	a. For a tool to test posts against the server, install and use PostMan.
+
+
+Credentials
+---------------
+cmh171
+KiviHbcMrE7Ywipl
+
+htl17
+Z1cUFCAF5shYUnDe
+
+nbi15
+G5SbyaNctuyqAT3Y
+
+nap78
+SpkYDxDly73e7DGg
+
+jlk212
+n51ZX0w52B7yhAvk
+
