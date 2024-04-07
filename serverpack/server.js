@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://cmh171:KiviHbcMrE7Ywipl@application.dkdfsrp.mongodb.net/', {
+mongoose.connect('mongodb+srv://htl17:TsMEMmM0Pa0tx6gT@application.dkdfsrp.mongodb.net/project', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -29,7 +29,9 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-
+/**
+ * Gets all Doors
+ */
 app.get('/test/doors', async (req, res) => {
   try {
     const doors = await Door.find();
@@ -39,7 +41,9 @@ app.get('/test/doors', async (req, res) => {
   }
 });
 
-
+/**
+ * Gets a single Door
+ */
 app.get('/test/doors/:name', async(req, res) =>
 {
   try {
@@ -54,6 +58,9 @@ app.get('/test/doors/:name', async(req, res) =>
   }
 });
 
+/**
+ * Update a single Door
+ */
 app.post('/test/doors/update', async (req, res) => {
   const { name, status } = req.body;
 
