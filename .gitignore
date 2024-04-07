@@ -1,0 +1,11 @@
+# ignore everything
+
+*
+
+# unignore specific things
+!.gitignore
+!LICENSE
+!README.md
+!serverpack
+!serverpack/*.js
+!serverpack/*.txt
