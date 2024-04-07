@@ -1,14 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Door = require('./doorModel');
+const cors = require('cors');
 
 const app = express();
 
 // Middleware to parse JSON requests
 app.use(express.json());
 
+/**
+ * Needed CORS for the device to connect to the server. 
+ */
+const corsOptions = {
+  origin: '*'
+};
+// Middleware to use CORS
+app.use(cors(corsOptions));
+
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://htl17:TsMEMmM0Pa0tx6gT@application.dkdfsrp.mongodb.net/project', {
+mongoose.connect('mongodb+srv://mongoAccess:systemsecurity@application.dkdfsrp.mongodb.net/project', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -42,10 +52,11 @@ app.get('/test/doors', async (req, res) => {
 });
 
 /**
- * Gets a single Door
+ * Gets the status of a single Door
  */
-app.get('/test/doors/:name', async(req, res) =>
-{
+app.get('/test/doors/:name', async (req, res) => {
+  //console.log("Get door");
+
   try {
     const door = await Door.findOne({ name: req.params.name });
     if (door) {
@@ -54,12 +65,21 @@ app.get('/test/doors/:name', async(req, res) =>
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
 /**
- * Update a single Door
+ * Register a new Door device.
+ */
+app.post('/test/doors/register', async (req, res) => {
+  console.log(req.body);
+  Door.create({ name: req.body.name, status: req.body.status });
+  res.status(201);
+});
+
+/**
+ * Update a single Door. Do this from the App
  */
 app.post('/test/doors/update', async (req, res) => {
   const { name, status } = req.body;
@@ -88,11 +108,8 @@ app.post('/test/doors/update', async (req, res) => {
 
 
 
-
-
-
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
