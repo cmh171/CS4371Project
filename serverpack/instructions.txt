@@ -2,7 +2,8 @@
 # Instructions on setting up and getting the web server running on your device
 
 1. If it's not already installed, install NPM.
-	a. This varies between windows and MacOS. It's not hard- google and chatgpt will help.
+	a. This varies between windows and MacOS. 
+		 It's pretty straightforward. Google and Chatgpt will help.
 
 2. Accept your invitation to the mongodb atlas database (if you haven't done so already)
 
