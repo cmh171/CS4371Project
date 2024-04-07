@@ -9,6 +9,7 @@
 3. Edit server.js line 11 (the connection string)
 	a. place 'mongodb+srv://<username>:<password>@application.dkdfsrp.mongodb.net/'
 		as the connection string
+	b. insert your username and password in the respective fields from the list of creds below.
 
 4. Open terminal or powershell
 
