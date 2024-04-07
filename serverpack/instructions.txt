@@ -24,8 +24,27 @@
 	a. If it was able to do it, it will say so.
 
 8. You should now be able to make HTTP posts against the server. 
-	a. For a tool to test posts against the server, install and use PostMan.
+	a. For a tool to test posts against the server, install and use Postman.
 
+
+CURRENTLY SUPPORTED HTTP REQUESTS:
+
+1. Check if the server is alive and responding
+HTTP GET:: http://localhost:3000/
+
+2. Check the table of doors
+HTTP GET:: http://localhost:3000/test/doors
+
+3. Check the status of a given door
+HTTP GET:: http://localhost:3000/test/doors/$doorName
+
+4. Update the status of a given door
+HTTP POST:: http://localhost:3000/test/doors/update
+
+{
+  "name": "GARAGE",
+  "status": 1
+}
 
 Credentials
 ---------------
