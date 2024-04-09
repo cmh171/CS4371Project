@@ -7,6 +7,7 @@
 
 2. Accept your invitation to the mongodb atlas database (if you haven't done so already)
 
+// No longer needed, ignore step 3
 3. Edit server.js line 11 (the connection string)
 	a. place 'mongodb+srv://<username>:<password>@application.dkdfsrp.mongodb.net/'
 		as the connection string
@@ -47,6 +48,8 @@ HTTP POST:: http://localhost:3000/test/doors/update
   "status": 1
 }
 
+// not needed after generic user creation
+
 Credentials
 ---------------
 cmh171
@@ -63,4 +66,6 @@ SpkYDxDly73e7DGg
 
 jlk212
 n51ZX0w52B7yhAvk
+
+'mongodb+srv://mongoAccess:systemsecurity@application.dkdfsrp.mongodb.net/project'
 

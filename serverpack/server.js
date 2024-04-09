@@ -8,8 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://cmh171:KiviHbcMrE7Ywipl@application.dkdfsrp.mongodb.net/', 
-                 'mongodb+srv://jlk212:n51ZX0w52B7yhAvk@application.dkdfsrp.mongodb.net/', {
+mongoose.connect('mongodb+srv://mongoAccess:systemsecurity@application.dkdfsrp.mongodb.net/project', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -31,7 +30,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/test/doors', async (req, res) => {
+app.get('/project/doors', async (req, res) => {
   try {
     const doors = await Door.find();
     res.json(doors);
@@ -41,7 +40,7 @@ app.get('/test/doors', async (req, res) => {
 });
 
 
-app.get('/test/doors/:name', async(req, res) =>
+app.get('/project/doors/:name', async(req, res) =>
 {
   try {
     const door = await Door.findOne({ name: req.params.name });
@@ -55,11 +54,11 @@ app.get('/test/doors/:name', async(req, res) =>
   }
 });
 
-app.post('/test/doors/update', async (req, res) => {
+app.post('/project/doors/update', async (req, res) => {
   const { name, status } = req.body;
 
   // Check if the status is valid (0 or 1)
-  if (status !== 0 && status !== 1) {
+  if (status !== "opened" && status !== "closed") {
     return res.status(400).json({ message: 'Invalid status. Status must be 0 or 1.' });
   }
 
@@ -79,9 +78,6 @@ app.post('/test/doors/update', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
-
 
 
 
