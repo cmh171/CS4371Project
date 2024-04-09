@@ -35,17 +35,17 @@ CURRENTLY SUPPORTED HTTP REQUESTS:
 HTTP GET:: http://localhost:3000/
 
 2. Check the table of doors
-HTTP GET:: http://localhost:3000/test/doors
+HTTP GET:: http://localhost:3000/project/doors
 
 3. Check the status of a given door
-HTTP GET:: http://localhost:3000/test/doors/$doorName
+HTTP GET:: http://localhost:3000/project/doors/$doorName
 
 4. Update the status of a given door
-HTTP POST:: http://localhost:3000/test/doors/update
+HTTP POST:: http://localhost:3000/project/doors/update
 
 {
   "name": "GARAGE",
-  "status": 1
+  "status": "closed"
 }
 
 // not needed after generic user creation
