@@ -12,6 +12,10 @@ let closed = "fa-door-closed"
 let devices = [] // list to contain all the devices once they are fetched
 let intervals = []; // contains "intervals", a periodic timer that will make HTTP requests
 
+/**
+ * GETs all devices that are registered on the server, and then displays those devices.
+ * Also sets a periodic interval for each device to make GET requests.
+ */
 function fetchRegisteredDevices() {
     console.log('Fetching all devices...');
     fetch(`http://127.0.0.1:3000/test/doors`)
@@ -31,7 +35,7 @@ function fetchRegisteredDevices() {
 }
 
 /**
- * Poll device status from the hub/server, then change the device status to match polled status.
+ * Poll single device status from the hub/server, then change the device status to match polled status.
  */
 function fetchDeviceStatus(device) {
     //console.log(`Fetching: ${device.name}`);
@@ -64,30 +68,40 @@ function register(deviceName) {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => {
-        console.log('Registered got a response');
-        if (response.ok) {
-            console.log("Device Registered");
-            devices = []; // clear the devices
-            let childElements = document.body.querySelectorAll(".device-box");
-            //document.body.innerHTML = "";
-            childElements.forEach(element => {
-                element.remove();
-            });
-            intervals.forEach(interval => {
-                clearInterval(interval);
-            });
-            fetchRegisteredDevices();
-        }
-    });
+        .then(response => {
+            console.log('Registered got a response');
+            if (response.ok) {
+                //console.log("Device Registered");
+                alert(`Device Registered: ${deviceName}`);
+                devices = []; // clear the devices
+                let childElements = document.body.querySelectorAll(".device-box");
+                //document.body.innerHTML = "";
+                childElements.forEach(element => {
+                    element.remove();
+                });
+                intervals.forEach(interval => {
+                    clearInterval(interval);
+                });
+                fetchRegisteredDevices();
+            }
+            else {
+                alert(`Error Registering Device: ${deviceName}`);
+            }
+        });
 }
 
+/**
+ * Function to display all devices registered on the server.
+ */
 function displayDevices() {
     devices.forEach(device => {
         document.body.appendChild(deviceDisplay(device));
     });
 }
 
+/**
+ * Code for displaying a single device. Creates the necessary DOM elements.
+ */
 function deviceDisplay(device) {
     // create i element and attach correct attributes
     let i = document.createElement("i");
@@ -108,16 +122,25 @@ function deviceDisplay(device) {
     return deviceBox;
 }
 
-let start = document.getElementById("start");
-let addDev = document.getElementById("add");
+let start = document.getElementById("start"); // button to start the simulation
+let addDev = document.getElementById("add"); // button to register new devices in the simulation
+
+/**
+ * When start button is clicked, all devices are fetched and the simulation begins.
+ */
 start.addEventListener('click', () => {
     fetchRegisteredDevices();
 });
+
+/**
+ * When add button is clicked, it registers a new device.
+ */
 addDev.addEventListener('click', () => {
     console.log("Clicked");
     let addInput = document.getElementById("device-input");
     console.log(addInput.value);
-    register(addInput.value);
+    let inputValue = addInput.value.trim();
+    if(inputValue) register(addInput.value);
     addInput.value = "";
 });
 
