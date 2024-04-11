@@ -74,8 +74,14 @@ app.get('/test/doors/:name', async (req, res) => {
  */
 app.post('/test/doors/register', async (req, res) => {
   console.log(req.body);
-  Door.create({ name: req.body.name, status: req.body.status });
-  res.status(201);
+  try {
+    Door.create({ name: req.body.name, status: req.body.status }).then(() => {
+      res.sendStatus(201);
+    });
+  }
+  catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 /**
@@ -109,7 +115,7 @@ app.post('/test/doors/update', async (req, res) => {
 
 
 // Start the server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
