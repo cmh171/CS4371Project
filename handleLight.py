@@ -4,7 +4,7 @@ import requests
 
 class toggleLights:
     def __init__(self):
-        self.is_on = False
+        self.toggle_value = 0
 
     def __init__(button, root):
 
@@ -19,22 +19,14 @@ class toggleLights:
         #Connecting to Mongodb
         button.client = MongoClient()
         button.db = button.client['project'] 
-        button.collection = button.db['lights']
+        button.collection = button.db['doors']
         print("handleLights initialized successfully.")
 
-    def on(self):
-        self.is_on = True
-        print("The lights are on")
-
-    def off(self):
-        self.is_on = False
-        print("The lights are off")
-
     def toggle(self):
-        if self.is_on:
-            self.off()
+        if self.toggle_value == 0:
+            self.state = 0
         else:
-            self.on()
+            self.state = 1
 
 if __name__ == "__main__":
     lights = toggleLights()
@@ -46,6 +38,10 @@ if __name__ == "__main__":
         print("Connected")
     else:
         print("Not Connected")
+
+    #For bug fixing purposes, gives the current table in the database
+    url = 'http://localhost:3000/project/doors/'
+    response = requests.get(url)
 
     # Simulating IoT commands
     print("Turning on the lights...")
