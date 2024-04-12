@@ -13,7 +13,12 @@ Step 3: Application with run and encrypt
 Step 4: See change in door status
 
 How to clone Project:
-
+Step 1: To begin the cloning process, click the green CODE button on the main repository page
+Step 2: Copy the repository's URL (Can be done using SSH, HTTPS, or GitHub CLI)
+Step 3: Open Git Bash and change the current directory to the location where you would like the cloned repository
+Step 4: Type [git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY] 
+Step 5: Press enter to create a local clone
+Step 6: Done
 
 Scholarly Papers:
 1. Sensitive Information Tracking in Commodity IoT (https://arxiv.org/pdf/1802.08307v1.pdf)
