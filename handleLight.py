@@ -1,6 +1,26 @@
+import tkinter as tk
+from pymongo import MongoClient
+import requests
+
 class toggleLights:
     def __init__(self):
         self.is_on = False
+
+    def __init__(button, root):
+
+        #Setting up button
+        button.root = root
+        button.toggle_value = 0
+        button.toggle_button = tk.Button(root, text="Closed", command=button.toggle)
+        button.toggle_button.pack()
+        button.count = 0
+        button.state = 0
+
+        #Connecting to Mongodb
+        button.client = MongoClient()
+        button.db = button.client['project'] 
+        button.collection = button.db['lights']
+        print("handleLights initialized successfully.")
 
     def on(self):
         self.is_on = True
@@ -17,14 +37,22 @@ class toggleLights:
             self.on()
 
 if __name__ == "__main__":
-    door = toggleLights()
+    lights = toggleLights()
+
+    #Checking if app is connected to the server
+    url = 'http://localhost:3000/'
+    response = requests.get(url)
+    if response.status_code == 200:
+        print("Connected")
+    else:
+        print("Not Connected")
 
     # Simulating IoT commands
     print("Turning on the lights...")
-    door.on()
+    lights.on()
 
     print("Toggling the lights...")
-    door.toggle()
+    lights.toggle()
 
     print("Turning off the lights...")
-    door.off()
+    lights.off()
