@@ -405,9 +405,6 @@ class ToggleButtonApp:
         print('Decryption: ', button.decrypt3)
         print("Garage is: ", button.decrypt3)
 
-
-       
-
 def main():
 
     print("Starting ToggleButtonApp...")
