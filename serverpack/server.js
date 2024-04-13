@@ -57,11 +57,6 @@ app.get('/project/doors/:name', async(req, res) =>
 app.post('/project/doors/update', async (req, res) => {
   const { name, status } = req.body;
 
-  // Check if the status is valid (0 or 1)
-  if (status !== "opened" && status !== "closed") {
-    return res.status(400).json({ message: 'Invalid status. Status must be 0 or 1.' });
-  }
-
   try {
     const door = await Door.findOneAndUpdate(
       { name: name },
@@ -86,4 +81,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
