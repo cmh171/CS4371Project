@@ -171,8 +171,7 @@ def update_textbox(button, text):
 
         # Update the textbox with new text
         button.textbox.insert(tk.END, text + "\n")  
-
-
+        
 class ToggleButtonApp:
     def __init__(button, root):
 
@@ -225,7 +224,6 @@ class ToggleButtonApp:
         button.collection = button.db['doors']
         print("ToggleButtonApp initialized successfully.")
 
-    
     def toggle (button):
 
         #Connects to the update path
@@ -345,7 +343,6 @@ class ToggleButtonApp:
         print('Decryption: ', button.decrypt2)
         print("House back is: ", button.decrypt2)
         
-
     def toggle3 (button):
 
         #Connects to the update path
