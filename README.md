@@ -6,7 +6,7 @@ Functionality of the Project:
 Our project is the connection between an IoT device/ endpoint, a server (with a database as a component of the server), and an IoT application. The
 purpose of our project is to encrypt the potential data flows between the 3 points of contact.
 
-How to run the Project:
+How to run the Project:   
 Step 1: See the provided instructions.txt to set up the connection to the database.   
 Step 2: Once connected to the database, run the application.   
 Step 3: Application with run and encrypt.  
