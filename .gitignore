@@ -9,3 +9,6 @@
 !serverpack
 !serverpack/*.js
 !serverpack/*.txt
+!serverpack/*.json
+!devicepack
+!devicepack/*

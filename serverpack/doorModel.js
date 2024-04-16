@@ -6,7 +6,7 @@ const doorSchema = new Schema({
     // Define your schema here. For example:
     id: { type: Number},
     name: { type: String},
-    status: { type: String}
+    status: { type: Number}
 });
 
 const Door = mongoose.model('Door', doorSchema, 'doors');

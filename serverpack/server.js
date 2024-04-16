@@ -1,11 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Door = require('./doorModel');
+const cors = require('cors');
 
 const app = express();
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+/**
+ * Needed CORS for the device to connect to the server. 
+ */
+const corsOptions = {
+  origin: '*'
+};
+// Middleware to use CORS
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://mongoAccess:systemsecurity@application.dkdfsrp.mongodb.net/project', {
@@ -30,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/project/doors', async (req, res) => {
+app.get('/test/doors', async (req, res) => {
   try {
     const doors = await Door.find();
     res.json(doors);
@@ -39,8 +49,13 @@ app.get('/project/doors', async (req, res) => {
   }
 });
 
+/**
+ * Gets the status of a single Door
+ */
+app.get('/project/doors/:name', async (req, res) => {
+  //console.log("Get door");
 
-app.get('/project/doors/:name', async(req, res) =>
+app.get('/test/doors/:name', async(req, res) =>
 {
   try {
     const door = await Door.findOne({ name: req.params.name });
@@ -50,12 +65,17 @@ app.get('/project/doors/:name', async(req, res) =>
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
-app.post('/project/doors/update', async (req, res) => {
+app.post('/test/doors/update', async (req, res) => {
   const { name, status } = req.body;
+
+  // Check if the status is valid (0 or 1)
+  if (status !== 0 && status !== 1) {
+    return res.status(400).json({ message: 'Invalid status. Status must be 0 or 1.' });
+  }
 
   try {
     const door = await Door.findOneAndUpdate(
@@ -70,6 +90,7 @@ app.post('/project/doors/update', async (req, res) => {
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
+    console.log("There was an error updating the device.");
     res.status(500).json({ message: error.message });
   }
 });
