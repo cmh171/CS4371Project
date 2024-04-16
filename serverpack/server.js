@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 /**
  * Gets all Doors
  */
-app.get('/test/doors', async (req, res) => {
+app.get('/project/doors', async (req, res) => {
   try {
     const doors = await Door.find();
     res.json(doors);
@@ -54,7 +54,7 @@ app.get('/test/doors', async (req, res) => {
 /**
  * Gets the status of a single Door
  */
-app.get('/test/doors/:name', async (req, res) => {
+app.get('/project/doors/:name', async (req, res) => {
   //console.log("Get door");
 
   try {
@@ -72,7 +72,7 @@ app.get('/test/doors/:name', async (req, res) => {
 /**
  * Register a new Door device.
  */
-app.post('/test/doors/register', async (req, res) => {
+app.post('/project/doors/register', async (req, res) => {
   console.log(req.body);
   try {
     Door.create({ name: req.body.name, status: req.body.status }).then(() => {
@@ -87,12 +87,14 @@ app.post('/test/doors/register', async (req, res) => {
 /**
  * Update a single Door. Do this from the App
  */
-app.post('/test/doors/update', async (req, res) => {
+app.post('/project/doors/update', async (req, res) => {
+  console.log("UPDATE CALLED");
   const { name, status } = req.body;
-
+  console.log(name);
+  console.log(status);
   // Check if the status is valid (0 or 1)
-  if (status !== 0 && status !== 1) {
-    return res.status(400).json({ message: 'Invalid status. Status must be 0 or 1.' });
+  if (!status) {
+    return res.status(400).json({ message: 'Invalid status.' });
   }
 
   try {
@@ -108,6 +110,7 @@ app.post('/test/doors/update', async (req, res) => {
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
+    console.log("There was an error updating the device.");
     res.status(500).json({ message: error.message });
   }
 });

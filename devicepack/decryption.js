@@ -139,7 +139,7 @@ function cipher_decryption(cipher, key) {
         let temp = [];
         temp.push([((k_inverse[0][0] * matrix[0]) + (k_inverse[1][0] * matrix[1])) % 26, ((k_inverse[0][1] * matrix[0] + k_inverse[1][1] * matrix[1])) % 26]);
         temp.forEach(t => {
-            console.log("LETTERS: ", t[0], t[1]);
+            //console.log("LETTERS: ", t[0], t[1]);
             decrypted_text = decrypted_text + int_to_letter(t[0]);
             decrypted_text = decrypted_text + int_to_letter(t[1]);
         });
@@ -147,5 +147,3 @@ function cipher_decryption(cipher, key) {
 
     return decrypted_text;
 }
-
-console.log("DECRYPT:", cipher_decryption("HIAT", "ddcf"));

@@ -18,7 +18,7 @@ let intervals = []; // contains "intervals", a periodic timer that will make HTT
  */
 function fetchRegisteredDevices() {
     console.log('Fetching all devices...');
-    fetch(`http://127.0.0.1:3000/test/doors`)
+    fetch(`http://127.0.0.1:3000/project/doors`)
         .then((response) => {
             if (response.ok) return response.json();
         })
@@ -39,7 +39,7 @@ function fetchRegisteredDevices() {
  */
 function fetchDeviceStatus(device) {
     //console.log(`Fetching: ${device.name}`);
-    fetch(`http://127.0.0.1:3000/test/doors/${device.name}`)
+    fetch(`http://127.0.0.1:3000/project/doors/${device.name}`)
         .then(response => {
             if (response.status === 404) {
                 // register device?
@@ -49,7 +49,9 @@ function fetchDeviceStatus(device) {
         .then(data => {
             //console.log(data);
             let dev = document.getElementById(`${device._id}`); // this gets the DOM element
-            if (data.status === "closed") dev.classList.replace(opened, closed);
+            decrypt_status = cipher_decryption(data.status, "door");
+            console.log(decrypt_status);
+            if (decrypt_status === "CLOSED") dev.classList.replace(opened, closed);
             else dev.classList.replace(closed, opened);
         });
 }
@@ -58,7 +60,7 @@ function fetchDeviceStatus(device) {
  * If the device isn't registered, register the device with the hub/server.
  */
 function register(deviceName) {
-    fetch('http://127.0.0.1:3000/test/doors/register', {
+    fetch('http://127.0.0.1:3000/project/doors/register', {
         method: 'POST',
         body: JSON.stringify({
             name: deviceName,
