@@ -7,6 +7,7 @@
 !LICENSE
 !README.md
 !serverpack
+!serverpack/**
 !serverpack/*.js
 !serverpack/*.txt
 !serverpack/*.json
