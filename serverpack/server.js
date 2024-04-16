@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
+
 /**
  * Gets all Doors
  */
@@ -57,6 +58,9 @@ app.get('/project/doors', async (req, res) => {
 app.get('/project/doors/:name', async (req, res) => {
   //console.log("Get door");
 
+
+app.get('/project/doors/:name', async(req, res) =>
+{
   try {
     const door = await Door.findOne({ name: req.params.name });
     if (door) {
