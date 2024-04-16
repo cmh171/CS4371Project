@@ -14,6 +14,7 @@ app.use(express.json());
 const corsOptions = {
   origin: '*'
 };
+
 // Middleware to use CORS
 app.use(cors(corsOptions));
 
@@ -39,7 +40,6 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-
 /**
  * Gets all Doors
  */
@@ -58,9 +58,6 @@ app.get('/project/doors', async (req, res) => {
 app.get('/project/doors/:name', async (req, res) => {
   //console.log("Get door");
 
-
-app.get('/project/doors/:name', async(req, res) =>
-{
   try {
     const door = await Door.findOne({ name: req.params.name });
     if (door) {
@@ -84,7 +81,7 @@ app.post('/project/doors/register', async (req, res) => {
     });
   }
   catch (error) {
-    res.sendStatus(500);
+    res.status(500).send({ message: error.message });
   }
 });
 
@@ -113,7 +110,7 @@ app.post('/project/doors/update', async (req, res) => {
     } else {
       res.status(404).json({ message: 'Door not found' });
     }
-  } catch (error) {
+  } catch (error) { // Corrected part
     console.log("There was an error updating the device.");
     res.status(500).json({ message: error.message });
   }
