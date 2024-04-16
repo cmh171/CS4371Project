@@ -8,6 +8,7 @@ purpose of our project is to encrypt the potential data flows between the 3 poin
 
 How to run the Project:   
 Step 1: See the provided instructions.txt to set up the connection to the database.   
+Step 2: Pip install numpy, request, mongoDB
 Step 2: Once connected to the database, run the application.   
 Step 3: Application with run and encrypt.  
 Step 4: See change in door status.   
