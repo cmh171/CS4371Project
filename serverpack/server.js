@@ -1,11 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Door = require('./doorModel');
+const cors = require('cors');
 
 const app = express();
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+/**
+ * Needed CORS for the device to connect to the server. 
+ */
+const corsOptions = {
+  origin: '*'
+};
+// Middleware to use CORS
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://mongoAccess:systemsecurity@application.dkdfsrp.mongodb.net/project', {
@@ -30,6 +40,9 @@ app.get('/', (req, res) => {
 });
 
 
+/**
+ * Gets all Doors
+ */
 app.get('/project/doors', async (req, res) => {
   try {
     const doors = await Door.find();
@@ -38,6 +51,12 @@ app.get('/project/doors', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+/**
+ * Gets the status of a single Door
+ */
+app.get('/project/doors/:name', async (req, res) => {
+  //console.log("Get door");
 
 
 app.get('/project/doors/:name', async(req, res) =>
@@ -50,16 +69,36 @@ app.get('/project/doors/:name', async(req, res) =>
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
-app.post('/project/doors/update', async (req, res) => {
-  const { name, status } = req.body;
+/**
+ * Register a new Door device.
+ */
+app.post('/project/doors/register', async (req, res) => {
+  console.log(req.body);
+  try {
+    Door.create({ name: req.body.name, status: req.body.status }).then(() => {
+      res.sendStatus(201);
+    });
+  }
+  catch (error) {
+    res.sendStatus(500);
+  }
+});
 
+/**
+ * Update a single Door. Do this from the App
+ */
+app.post('/project/doors/update', async (req, res) => {
+  console.log("UPDATE CALLED");
+  const { name, status } = req.body;
+  console.log(name);
+  console.log(status);
   // Check if the status is valid (0 or 1)
-  if (status !== "opened" && status !== "closed") {
-    return res.status(400).json({ message: 'Invalid status. Status must be 0 or 1.' });
+  if (!status) {
+    return res.status(400).json({ message: 'Invalid status.' });
   }
 
   try {
@@ -75,6 +114,7 @@ app.post('/project/doors/update', async (req, res) => {
       res.status(404).json({ message: 'Door not found' });
     }
   } catch (error) {
+    console.log("There was an error updating the device.");
     res.status(500).json({ message: error.message });
   }
 });
