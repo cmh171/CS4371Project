@@ -4,6 +4,14 @@ import requests
 import sys
 import numpy as np
 
+
+data = {
+            #'id' : button.count,
+            'name' : '',
+            'status' : ''
+        }
+key  = 'door'
+
 def cipher_encryption(plain, key):
     # removing spaces, setting to upper
         plain = plain.upper().replace(" ","")
@@ -178,7 +186,12 @@ class ToggleButtonApp:
         #Setting up button 1
         button.root = root
         button.toggle_value = 0
-        button.toggle_button = tk.Button(root, text="Closed", command=button.toggle)
+        url = 'http://localhost:3000/project/doors/HOUSE_FRONT'
+        response = requests.get(url, json=data)
+        if response.status_code == 200:
+            door_status_check = response.json().get('status')
+        button.decrypt = cipher_decryption(door_status_check, key)
+        button.toggle_button = tk.Button(root, text=button.decrypt, command=button.toggle)
         button.toggle_button.place(x=100, y=50)
         label = tk.Label(root,text="HOUSE_FRONT")
         label.place(x=100, y=25)
@@ -189,11 +202,15 @@ class ToggleButtonApp:
         button.closed = "closed"
         button.opened = "opened"
         button.encrypt = ''
-        button.decrypt = ''
-
+        
         #Setting up button 2
         button.toggle_value2 = 0
-        button.toggle_button2 = tk.Button(root, text="Closed", command=button.toggle2)
+        url = 'http://localhost:3000/project/doors/HOUSE_BACK'
+        response = requests.get(url, json=data)
+        if response.status_code == 200:
+            door_status_check2 = response.json().get('status')
+        button.decrypt2 = cipher_decryption(door_status_check2, key)
+        button.toggle_button2 = tk.Button(root, text=button.decrypt2, command=button.toggle)
         button.toggle_button2.place(x=225, y=50)
         label2 = tk.Label(root,text="HOUSE_BACK")
         label2.place(x=225, y=25)
@@ -206,7 +223,12 @@ class ToggleButtonApp:
 
         #Setting up button 3
         button.toggle_value3 = 0
-        button.toggle_button3 = tk.Button(root, text="Closed", command=button.toggle3)
+        url = 'http://localhost:3000/project/doors/GARAGE'
+        response = requests.get(url, json=data)
+        if response.status_code == 200:
+            door_status_check3 = response.json().get('status')
+        button.decrypt3 = cipher_decryption(door_status_check3, key)
+        button.toggle_button3 = tk.Button(root, text=button.decrypt3, command=button.toggle)
         button.toggle_button3.place(x=350, y=50)
         label3 = tk.Label(root,text="GARAGE")
         label3.place(x=350, y=25)
