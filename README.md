@@ -67,10 +67,11 @@ D. Application & Endpoint Use
     2. Run "device.html" in a modern browser (eg Firefox)   
         This can be most easily performed by using the "explorer" GUI to navigate to the   
         $folder/devicepack directory and opening the file with your browser.   
-    3. Now that the REST Server, the PyApp application, and the endpoint are all showing,   
+    3. On the webpage, press the "Start Sim" button. Doors and their current status will display.   
+    4. Now that the REST Server, the PyApp application, and the endpoint are all showing,   
         we can use the application to control the status of the device.    
-    4. On the running GUI of testingapp.py, click on the status buttons of the different doors.   
-    5. The status between "opened" and "closed" will change on the device endpoint (as viewed in your browser)   
+    5. On the running GUI of testingapp.py, click on the status buttons of the different doors.   
+    6. The status between "opened" and "closed" will change on the device endpoint (as viewed in your browser)   
 
 This is a demonstration of the three-component setup of the standard IOT device, using encryption to relay status updated.   
 
