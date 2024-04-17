@@ -1,4 +1,5 @@
-Group 15 consists of Hunter Treadway, James Allen, Nathan Padgett, Chris Hanly, and Sam Nava.
+Group 15 consists of:   
+Hunter Treadway, James Allen, Nathan Padgett, Chris Hanly, and Sam Nava.
 
 Preamble:
 
