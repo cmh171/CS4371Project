@@ -156,11 +156,11 @@ G. Addendum
 
     2.) A Comprehensive Survey of Recent Internet Measurement Techniques for Cyber Security
         (https://www.sciencedirect.com/science/article/pii/S0167404823000330)   
-        May 2023
+        May 2023   
         This article validates the statistics that Saint found, but decided to take it a step further and develop a new application. Celikatel  proposed SOTERIA. This is similar to saint in that is uses its data to find which apps leaked sensitive information to then check those apps to see if they followed privacy guidelines finding that 14% violated 29% of the security properties. Saints findings led to SOTERIA and is now being used to identify developers not following privacy guidelines, not just locate the faulty apps. SOTERIA is capable of saints functions and more.
 
     3.) Designing Privacy-Aware IoT Applications for Unregulated Domains (https://dl.acm.org/doi/pdf/10.1145/3648480)   
-        January 2024
+        January 2024   
         This article goes on to explain how Saint offers specialized analysis for smart things IoT apps. Its a great tool to provide privacy for developers and consumers. This paper discusses enhancing this tool by including more privacy features, but the new application is called PARROT. Some examples are including a trigger for privacy threats and having privacy lawyers evaluate their work. Saint was adapted into PARROT which is adhering to our current laws while also being used to determine if there is a security threat, instead of just checking for information sinks. 
 
     Overall, the Archaeology shows that the state of IOT devices and security has grown in leaps and bounds since the original SAINT paper. 
