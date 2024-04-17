@@ -29,6 +29,7 @@ E. Addendum
 A. Dependencies   
 
 The dependencies for running this project locally on your machine include:   
+
     1. Node JS (to run the REST server) https://nodejs.org/en/download   
     2. Pip (to install necessary python dependencies) https://pip.pypa.io/en/stable/installation/   
     3. Modern browser (to view device endpoint status) https://www.mozilla.org/en-US/firefox/new/   
@@ -40,6 +41,9 @@ Download the source code.
 --------------------------------------------
 
 B. Server Setup   
+
+A REST server needs to be running in order to mediate updates between the Application and the Device.
+This REST server is connecting to a cloud instance of MongoDB.   
 
     1. Once the source code is downloaded, unzip the compressed file to a desired location   
         hereby known as $folder.   
@@ -54,6 +58,7 @@ B. Server Setup
 --------------------------------------------
 
 C. Application Setup   
+A simple python application will be used to send updates to the REST server through a simple GUI.   
 
     1. Change directory to $folder/pyapp   
     2. In the terminal, run "pip install pymongo requests numpy"   
@@ -65,6 +70,9 @@ C. Application Setup
 --------------------------------------------
 
 D. Application & Endpoint Use   
+A javascript web application will be used to serve as a "device controller", otherwise known as a device endpoint.   
+The javascript web application can register new devices with the REST server and application.   
+Otherwise, it periodically reads from the REST server to acquire status updates.   
 
     1. Under $folder/devicepack exists a file exists "device.html"   
     2. Run "device.html" in a modern browser (eg Firefox)   
