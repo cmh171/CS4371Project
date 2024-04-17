@@ -1,7 +1,19 @@
 Group 15 consists of:   
 Hunter Treadway, James Allen, Nathan Padgett, Chris Hanly, and Sam Nava.
 
-Preamble:
+-------------------------------------------
+
+Overview:   
+A. Preamble
+B. Dependencies   
+C. Server Setup   
+D. Application Setup   
+E. Application & Endpoint Use   
+F. Addendum   
+
+-------------------------------------------
+
+A. Preamble:
 
 The common IOT schema includes three core components: An IOT device, a Server, and an Application.   
 Namely, an application is used to send messages to an IOT server/hub.   
@@ -15,18 +27,9 @@ encryption that is hardcoded into the Application and IOT device. Furthermore th
 the context of this project is in fact a javascript application. This javascript application is being
 used to imitate software that may actually be seen on an IOT device.   
 
--------------------------------------------
-
-Overview:   
-A. Dependencies   
-B. Server Setup   
-C. Application Setup   
-D. Application & Endpoint Use   
-E. Addendum   
-
 --------------------------------------------
 
-A. Dependencies   
+B. Dependencies   
 
 The dependencies for running this project locally on your machine include:   
 
@@ -40,7 +43,7 @@ Download the source code.
 
 --------------------------------------------
 
-B. Server Setup   
+C. Server Setup   
 
 A REST server needs to be running in order to mediate updates between the Application and the Device.
 This REST server is connecting to a cloud instance of MongoDB.   
@@ -57,7 +60,7 @@ This REST server is connecting to a cloud instance of MongoDB.
 
 --------------------------------------------
 
-C. Application Setup   
+D. Application Setup   
 A simple python application will be used to send updates to the REST server through a simple GUI.   
 
     1. Change directory to $folder/pyapp   
@@ -69,7 +72,7 @@ A simple python application will be used to send updates to the REST server thro
 
 --------------------------------------------
 
-D. Application & Endpoint Use   
+E. Application & Endpoint Use   
 A javascript web application will be used to serve as a "device controller", otherwise known as a device endpoint.   
 The javascript web application can register new devices with the REST server and application.   
 Otherwise, it periodically reads from the REST server to acquire status updates.   
@@ -88,7 +91,7 @@ This is a demonstration of the three-component setup of the standard IOT device,
 
 --------------------------------------------
 
-E. Addendum   
+F. Addendum   
 
 Scholarly Papers:   
 
