@@ -4,7 +4,7 @@ Hunter Treadway, James Allen, Nathan Padgett, Chris Hanly, and Sam Nava.
 -------------------------------------------
 
 Overview:   
-A. Preamble
+A. Preamble   
 B. Dependencies   
 C. Server Setup   
 D. Application Setup   
