@@ -15,3 +15,5 @@
 !devicepack/*
 !pyapp/
 !pyapp/*.py
+!node_modules
+!node_modules/*.*
