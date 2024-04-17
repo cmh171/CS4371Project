@@ -142,7 +142,7 @@ addDev.addEventListener('click', () => {
     let addInput = document.getElementById("device-input");
     console.log(addInput.value);
     let inputValue = addInput.value.trim();
-    if(inputValue) register(addInput.value);
+    if (inputValue) register(addInput.value);
     addInput.value = "";
 });
 

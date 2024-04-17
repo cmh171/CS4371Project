@@ -1,9 +1,9 @@
 /**
- * We use a basic hill cipher for encryption/decryption
- * It's not a good encryption, but it's meant to showcase our strategy.
- * It's also not entirely simplistic.
+ * Returns a alphabetic character given a numerical value.
+ * Also accounts for negatives numbers produced from mod operations.
+ * @param {*} i - an Integer that is the key for the object
+ * @returns 
  */
-
 function int_to_letter(i) {
     if (i < 0) i += 26;
     let int_obj = {
@@ -37,7 +37,11 @@ function int_to_letter(i) {
     return int_obj[Number(i)];
 }
 
-
+/**
+ * Returns an integer given an alphabetic character
+ * @param {*} letter an alphabetic character
+ * @returns 
+ */
 function letter_to_int(letter) {
     let letter_obj = {
         'A': 0,
@@ -70,7 +74,12 @@ function letter_to_int(letter) {
     return letter_obj[letter]
 }
 
-
+/**
+ * Recursive implementation of the extended euclidean algorithm
+ * @param {*} a 
+ * @param {*} b 
+ * @returns 
+ */
 function extended_euclidean_algorithm(a, b) {
     if (a === 0) {
         return [b, 0, 1];
@@ -83,26 +92,48 @@ function extended_euclidean_algorithm(a, b) {
     }
 }
 
-function mult_inverse(det, mod) {
-    while (det < mod)
-        det += mod;
-    let [gcd, x, _] = extended_euclidean_algorithm(det, mod);
+/**
+ * Finds the multiplicative inverse of a number and its mod
+ * @param {*} num
+ * @param {*} mod 
+ * @returns 
+ */
+function mult_inverse(num, mod) {
+    while (num < mod)
+        num += mod;
+    let [gcd, x, _] = extended_euclidean_algorithm(num, mod);
     if (gcd != 1) {
         console.error("INVALID GCD!!!");
     }
     else return x % mod;
 }
 
+/**
+ * A helper function that makes all string characters upper case, and replaces all spaces with nothing.
+ * @param {*} text 
+ * @returns 
+ */
 function upper_and_replace(text) {
     text = text.toUpperCase().replace(' ', '');
     return text;
 }
 
+/**
+ * A function to find the determinant of a 2d matrix.
+ * @param {*} key2d 
+ * @returns 
+ */
 function determinant(key2d) {
     let det = (key2d[0][0] * key2d[1][1]) - (key2d[1][0] * key2d[0][1]);
     return det;
 }
 
+/**
+ * A function to find the inverse of a matrix
+ * @param {*} mult_inverse 
+ * @param {*} adj 
+ * @returns 
+ */
 function key_inverse(mult_inverse, adj) {
     let temp = [[adj[0][0] % 26, adj[0][1] % 26], [adj[1][0] % 26, adj[1][1] % 26]];
     let k_prep = [[temp[0][0] * mult_inverse, temp[0][1] * mult_inverse], [temp[1][0] * mult_inverse, temp[1][1] * mult_inverse]];
@@ -111,6 +142,12 @@ function key_inverse(mult_inverse, adj) {
     return k_inverse;
 }
 
+/**
+ * Decrypts a hill cipher given the ciphertext and the key.
+ * @param {*} cipher 
+ * @param {*} key 
+ * @returns 
+ */
 function cipher_decryption(cipher, key) {
     let msg_matrices = [];
     
