@@ -1,4 +1,9 @@
-Group 15 consists of:   
+CS.4371.251 - Computer Systems Security   
+Professor: Dr. Heena Rathore   
+Texas State University   
+04/17/2024
+
+Authors (Group 15) consists of:   
 Hunter Treadway, James Allen, Nathan Padgett, Chris Hanly, and Sam Nava.
 
 -------------------------------------------

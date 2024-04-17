@@ -1,7 +1,22 @@
+/* Server.js
+
+Simple REST Server used to facilitate updates between an IOT application and 
+IOT Device controller.
+
+Setup based on the MERN framework.
+Uses Express, Mongoose, and MongoDB.
+Connecting to a MongoDB Atlas cloud database.
+
+Primary Contributors: Christopher Hanly and Hunter Treadway
+*/
+
+// require mongoose, express, and cors
 const express = require('express');
 const mongoose = require('mongoose');
-const Door = require('./doorModel');
 const cors = require('cors');
+
+// use mongoose door model
+const Door = require('./doorModel');
 
 const app = express();
 
@@ -52,7 +67,7 @@ app.get('/project/doors', async (req, res) => {
   }
 });
 
-/**
+/*
  * Gets the status of a single Door
  */
 app.get('/project/doors/:name', async (req, res) => {
@@ -85,7 +100,7 @@ app.post('/project/doors/register', async (req, res) => {
   }
 });
 
-/**
+/*
  * Update a single Door. Do this from the App
  */
 app.post('/project/doors/update', async (req, res) => {
@@ -110,13 +125,11 @@ app.post('/project/doors/update', async (req, res) => {
     } else {
       res.status(404).json({ message: 'Door not found' });
     }
-  } catch (error) { // Corrected part
+  } catch (error) { 
     console.log("There was an error updating the device.");
     res.status(500).json({ message: error.message });
   }
 });
-
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;
