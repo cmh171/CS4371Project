@@ -4,6 +4,21 @@ import requests
 import sys
 import numpy as np
 
+#----------------------------------------------------------
+#Defining data layout and key globally
+#----------------------------------------------------------
+
+data = {
+            #'id' : button.count,
+            'name' : '',
+            'status' : ''
+        }
+key = 'door'
+
+#----------------------------------------------------------
+#hill encryption 
+#----------------------------------------------------------
+
 def cipher_encryption(plain, key):
     # removing spaces, setting to upper
         plain = plain.upper().replace(" ","")
@@ -74,6 +89,10 @@ def cipher_encryption(plain, key):
         if padding_char_flag == 1:
             encrypted_text = encrypted_text[:-1]
         return encrypted_text
+
+#----------------------------------------------------------
+#hill decryption
+#----------------------------------------------------------
 
 def cipher_decryption(cipher, key):
     # removing spaces, setting to upper
@@ -161,6 +180,10 @@ def cipher_decryption(cipher, key):
     
     return decrypted_text
 
+#----------------------------------------------------------
+#Updating the textbox status
+#----------------------------------------------------------
+
 def update_textbox(button, text):
         
         #Deletes any old lines once the max of 10 lines of text has been reached
@@ -171,14 +194,24 @@ def update_textbox(button, text):
 
         # Update the textbox with new text
         button.textbox.insert(tk.END, text + "\n")  
-        
+
+#----------------------------------------------------------
+#Creating the button class and setting up the button
+#----------------------------------------------------------
+
 class ToggleButtonApp:
     def __init__(button, root):
-
+        #grabbing current door status in db
+        button.state = 0
+        url = 'http://localhost:3000/project/doors/HOUSE_FRONT'
+        response = requests.get(url, json=data)
+        if response.status_code == 200:
+            door_status = response.json().get('status')
         #Setting up button 1
+        button.door_status_decrypt = cipher_decryption(door_status,key)
         button.root = root
         button.toggle_value = 0
-        button.toggle_button = tk.Button(root, text="Closed", command=button.toggle)
+        button.toggle_button = tk.Button(root, text='Toggle Status', command=button.toggle)
         button.toggle_button.place(x=100, y=50)
         label = tk.Label(root,text="HOUSE_FRONT")
         label.place(x=100, y=25)
@@ -191,9 +224,15 @@ class ToggleButtonApp:
         button.encrypt = ''
         button.decrypt = ''
 
+        #grabbing current door status in db
+        url2 = 'http://localhost:3000/project/doors/HOUSE_BACK'
+        response = requests.get(url2, json=data)
+        if response.status_code == 200:
+            door_status2 = response.json().get('status')
         #Setting up button 2
+        button.door_status_decrypt2 = cipher_decryption(door_status2,key)
         button.toggle_value2 = 0
-        button.toggle_button2 = tk.Button(root, text="Closed", command=button.toggle2)
+        button.toggle_button2 = tk.Button(root, text='Toggle Status', command=button.toggle2)
         button.toggle_button2.place(x=225, y=50)
         label2 = tk.Label(root,text="HOUSE_BACK")
         label2.place(x=225, y=25)
@@ -204,9 +243,15 @@ class ToggleButtonApp:
         button.encrypt2 = ''
         button.decrypt2 = ''
 
+        #grabbing current door status in db
+        url3 = 'http://localhost:3000/project/doors/GARAGE'
+        response = requests.get(url3, json=data)
+        if response.status_code == 200:
+            door_status3 = response.json().get('status')
         #Setting up button 3
+        button.door_status_decrypt3 = cipher_decryption(door_status3,key)
         button.toggle_value3 = 0
-        button.toggle_button3 = tk.Button(root, text="Closed", command=button.toggle3)
+        button.toggle_button3 = tk.Button(root, text='Toggle Status', command=button.toggle3)
         button.toggle_button3.place(x=350, y=50)
         label3 = tk.Label(root,text="GARAGE")
         label3.place(x=350, y=25)
@@ -224,6 +269,10 @@ class ToggleButtonApp:
         button.collection = button.db['doors']
         print("ToggleButtonApp initialized successfully.")
 
+#----------------------------------------------------------
+#Toggle setup for the button 1
+#----------------------------------------------------------
+
     def toggle (button):
 
         #Connects to the update path
@@ -232,7 +281,7 @@ class ToggleButtonApp:
         #Setting up toggling for button 1
         print("Toggling button state...")
         button.toggle_value = not button.toggle_value
-        button.toggle_button.config(text=str('Closed'))
+        #button.toggle_button.config(text=str(button.door_status_decrypt))
 
         #If/Else to toggle whether button 1 "closed" or "open"
         if button.toggle_value == 0:
@@ -244,7 +293,7 @@ class ToggleButtonApp:
             
               
         else:
-            button.toggle_button.config(text=str('Open'))
+            #button.toggle_button.config(text=str('Open'))
             print ("Now Open")
             button.state = 1
             button.position = "open"
@@ -284,6 +333,10 @@ class ToggleButtonApp:
         print('Decryption: ', button.decrypt)
         print("House front is: ", button.decrypt)
 
+#----------------------------------------------------------
+#Toggle setup for the button 2
+#----------------------------------------------------------
+
     def toggle2 (button):
 
         #Connects to the update path
@@ -292,7 +345,6 @@ class ToggleButtonApp:
         #Setting up toggling for button 2
         print("Toggling button state...")
         button.toggle_value2 = not button.toggle_value2
-        button.toggle_button2.config(text=str('Closed'))
 
         #If/Else to toggle whether button 2 "closed" or "open"
         if button.toggle_value2 == 0:
@@ -303,7 +355,6 @@ class ToggleButtonApp:
             update_textbox(button, button.position2)
               
         else:
-            button.toggle_button2.config(text=str('Open'))
             print ("Now Open")
             button.state2 = 1
             button.position2 = "open"
@@ -342,7 +393,11 @@ class ToggleButtonApp:
 
         print('Decryption: ', button.decrypt2)
         print("House back is: ", button.decrypt2)
-        
+
+#----------------------------------------------------------
+#Toggle setup for the button 3
+#----------------------------------------------------------
+
     def toggle3 (button):
 
         #Connects to the update path
@@ -351,7 +406,6 @@ class ToggleButtonApp:
         #Setting up toggling for button 3
         print("Toggling button state...")
         button.toggle_value3 = not button.toggle_value3
-        button.toggle_button3.config(text=str('Closed'))
 
         #If/Else to toggle whether button 3 "closed" or "open"
         if button.toggle_value3 == 0:
@@ -362,7 +416,6 @@ class ToggleButtonApp:
             update_textbox(button, button.position3)
               
         else:
-            button.toggle_button3.config(text=str('Open'))
             print ("Now Open")
             button.state3 = 1
             button.position3 = "open"
@@ -401,6 +454,10 @@ class ToggleButtonApp:
 
         print('Decryption: ', button.decrypt3)
         print("Garage is: ", button.decrypt3)
+
+#----------------------------------------------------------
+#Main sets up the window
+#----------------------------------------------------------
 
 def main():
 
