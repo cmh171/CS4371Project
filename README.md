@@ -40,6 +40,7 @@ Download the source code.
 --------------------------------------------
 
 B. Server Setup   
+
     1. Once the source code is downloaded, unzip the compressed file to a desired location   
         hereby known as $folder.   
     2. Open terminal/ powershell on your device and change directory to $folder/serverpack     
@@ -53,6 +54,7 @@ B. Server Setup
 --------------------------------------------
 
 C. Application Setup   
+
     1. Change directory to $folder/pyapp   
     2. In the terminal, run "pip install pymongo requests numpy"   
     3. Once those install have completed, run "python3 testingapp.py"   
@@ -63,6 +65,7 @@ C. Application Setup
 --------------------------------------------
 
 D. Application & Endpoint Use   
+
     1. Under $folder/devicepack exists a file exists "device.html"   
     2. Run "device.html" in a modern browser (eg Firefox)   
         This can be most easily performed by using the "explorer" GUI to navigate to the   
