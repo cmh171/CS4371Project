@@ -566,7 +566,7 @@ class ToggleButtonApp:
             #'id' : button.count,
             'name' : 'HOUSE_FRONT',
             'status' : button.encrypt if button.state == 0 else button.encrypt,
-            'cipher' : 'play'
+            'cipher' : 'playfair'
             }
            print(data)
            print('Sending data as playfair')
@@ -658,7 +658,7 @@ class ToggleButtonApp:
             #'id' : button.count,
             'name' : 'HOUSE_BACK',
             'status' : button.encrypt2 if button.state2 == 0 else button.encrypt2,
-            'cipher' : 'play'
+            'cipher' : 'playfair'
             }
            print(data)
            print('Sending data as playfair')
@@ -738,7 +738,7 @@ class ToggleButtonApp:
             #'id' : button.count,
             'name' : 'GARAGE',
             'status' : button.encrypt3 if button.state3 == 0 else button.encrypt3,
-            'cipher' : 'play'
+            'cipher' : 'playfair'
             }
            print(data)
            print('Sending data as playfair')
