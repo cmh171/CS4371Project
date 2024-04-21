@@ -11,12 +11,8 @@ function findPosition(char, matrix) {
 }
 
 function playfair_decryption(cipher, key) {
-    const maxKeyLength = 25;
+    const startTime = window.performance.now();
 
-    if (key.length > maxKeyLength) {
-        console.log("Key must be 25 characters long or less.");
-        return;
-    }
     if (!/^[a-zA-Z]+$/.test(key)) {
         console.log("Key must not contain any numbers or symbols.");
         return;
@@ -93,6 +89,10 @@ function playfair_decryption(cipher, key) {
     if (appendedCharFlag === 1) {
         plainText = plainText.slice(0, -1);
     }
+
+    const endTime = window.performance.now();
+    const executionTime = endTime - startTime;
+    console.log(`Playfair cipher decryption took ${executionTime} milliseconds.`);
 
     return plainText;
 }

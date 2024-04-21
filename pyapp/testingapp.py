@@ -4,6 +4,7 @@ import requests
 import sys
 import numpy as np
 import time
+import logging
 
 #----------------------------------------------------------
 #Defining data layout and key globally
@@ -16,6 +17,16 @@ data = {
         }
 key = 'door'
 
+#----------------------------------------------------------
+#Defining logging parameters
+#----------------------------------------------------------
+
+logging.basicConfig(
+    filename='app.log',   
+    level=logging.INFO,   
+    filemode='a',         
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 #----------------------------------------------------------
 #hill encryption 
@@ -94,6 +105,8 @@ def cipher_encryption(plain, key):
         if padding_char_flag == 1:
             encrypted_text = encrypted_text[:-1]
         end_time_test = time.time()
+        execution_time = end_time_test - start_time_test
+        logging.info(logging.info(f"Hill cipher encryption took {execution_time:.6f} seconds."))
         print("End of function")
         print(end_time_test)
         return encrypted_text
@@ -204,12 +217,9 @@ def find_position(char, matrix):
 # On good run, returns a string of encrypted text
 # On bad runs, void return
 def playfair_encrypt(plain, key):
-    # key length max of 25 letters
-    max_key_length = 25
-
-    if len(key) > max_key_length:
-        print ("Key must be 25 characters long or less.")
-        return
+    
+    start_time_test = time.time()
+    
     if not key.isalpha():
         print ("Key must not contain any numbers or symbols.")
         return
@@ -300,6 +310,11 @@ def playfair_encrypt(plain, key):
     # if odd number of chars present in plaintext, trims encrypted string
     if appended_char_flag == 1:
         encrypted_text = encrypted_text[:-1]
+
+    end_time_test = time.time()
+
+    execution_time = end_time_test - start_time_test
+    logging.info(logging.info(f"Playfair cipher encryption took {execution_time:.6f} seconds."))
 
     return encrypted_text
 

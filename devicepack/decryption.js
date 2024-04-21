@@ -149,6 +149,7 @@ function key_inverse(mult_inverse, adj) {
  * @returns 
  */
 function cipher_decryption(cipher, key) {
+    const startTime = window.performance.now();
     let msg_matrices = [];
     
     
@@ -181,6 +182,10 @@ function cipher_decryption(cipher, key) {
             decrypted_text = decrypted_text + int_to_letter(t[1]);
         });
     });
+
+    const endTime = window.performance.now();
+    const executionTime = endTime - startTime;
+    console.log(`Hill cipher decryption took ${executionTime} milliseconds.`);
 
     return decrypted_text;
 }
