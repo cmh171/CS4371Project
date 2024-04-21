@@ -91,7 +91,7 @@ app.get('/project/doors/:name', async (req, res) => {
 app.post('/project/doors/register', async (req, res) => {
   console.log(req.body);
   try {
-    Door.create({ name: req.body.name, status: req.body.status }).then(() => {
+    Door.create({ name: req.body.name, status: req.body.status, cipher: req.body.cipher }).then(() => {
       res.sendStatus(201);
     });
   }
@@ -105,9 +105,10 @@ app.post('/project/doors/register', async (req, res) => {
  */
 app.post('/project/doors/update', async (req, res) => {
   console.log("UPDATE CALLED");
-  const { name, status } = req.body;
+  const { name, status, cipher } = req.body;
   console.log(name);
   console.log(status);
+  console.log(cipher);
   // Check if the status is valid (0 or 1)
   if (!status) {
     return res.status(400).json({ message: 'Invalid status.' });
@@ -116,7 +117,8 @@ app.post('/project/doors/update', async (req, res) => {
   try {
     const door = await Door.findOneAndUpdate(
       { name: name },
-      { $set: { status: status } },
+      { $set: { status: status,
+                cipher: cipher } },
       { new: true } // Return the updated document
     );
 
@@ -136,4 +138,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
