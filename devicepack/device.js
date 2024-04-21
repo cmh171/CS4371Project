@@ -50,7 +50,7 @@ function fetchDeviceStatus(device) {
             //console.log(data);
             let dev = document.getElementById(`${device._id}`); // this gets the DOM element
             let decrypt_status = "OPEN";
-            console.log("data cipher: ", data.cipher);
+            
             if (data.cipher == "hill")
             {
                 decrypt_status = cipher_decryption(data.status, "door");
@@ -58,7 +58,7 @@ function fetchDeviceStatus(device) {
             {
                 decrypt_status = playfair_decryption(data.status, "door");
             }
-            console.log(decrypt_status);
+            console.log(data.name," ",decrypt_status);
             if (decrypt_status === "CLOSED") dev.classList.replace(opened, closed);
             else dev.classList.replace(closed, opened);
         });

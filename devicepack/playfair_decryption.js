@@ -1,16 +1,8 @@
 function findPosition(char, matrix) {
 
-    // debug
-    console.log("findPosition loaded");
-    console.log("char: ", char);
-    console.log("matrix: ", matrix);
-    //
-
     for (let i = 0; i < matrix.length; i++) {
         let row = matrix[i];
         let index = row.indexOf(char);
-        console.log("row: ", row);
-        console.log("index: ", index);
         if (index !== -1) {
             return [i, index];
         }
@@ -20,10 +12,6 @@ function findPosition(char, matrix) {
 
 function playfair_decryption(cipher, key) {
     const maxKeyLength = 25;
-
-    // debug
-    console.log("playfair_decryption loaded");
-    //
 
     if (key.length > maxKeyLength) {
         console.log("Key must be 25 characters long or less.");
@@ -58,12 +46,6 @@ function playfair_decryption(cipher, key) {
 
     let finalChars = processedKey.concat(remainingLetters);
 
-    // DEBUG
-    console.log("processedkey: ", processedKey);
-    console.log("remainingLetters: ", remainingLetters);
-    console.log("finalchars:", finalChars);
-    //
-
     let keyMatrix = Array.from({ length: 5 }, () => Array(5));
     let index = 0;
     for (let i = 0; i < 5; i++) {
@@ -74,10 +56,6 @@ function playfair_decryption(cipher, key) {
             }
         }
     }
-
-    // For debugging
-    console.log(keyMatrix.map(row => row.join(' ')).join('\n'));
-    //
 
     // Process the cipher text
     let appendedCharFlag = 0;
@@ -116,6 +94,5 @@ function playfair_decryption(cipher, key) {
         plainText = plainText.slice(0, -1);
     }
 
-    console.log(plainText);
     return plainText;
 }

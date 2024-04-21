@@ -76,8 +76,10 @@ app.get('/project/doors/:name', async (req, res) => {
   try {
     const door = await Door.findOne({ name: req.params.name });
     if (door) {
-      res.json({ status: door.status,
-                 cipher: door.cipher 
+      res.json({ 
+                name: door.name,
+                status: door.status,
+                cipher: door.cipher 
                 },);
     } else {
       res.status(404).json({ message: 'Door not found' });
