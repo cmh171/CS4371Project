@@ -49,7 +49,15 @@ function fetchDeviceStatus(device) {
         .then(data => {
             //console.log(data);
             let dev = document.getElementById(`${device._id}`); // this gets the DOM element
-            decrypt_status = cipher_decryption(data.status, "door");
+            let decrypt_status = "OPEN";
+            console.log("data cipher: ", data.cipher);
+            if (data.cipher == "hill")
+            {
+                decrypt_status = cipher_decryption(data.status, "door");
+            } else if (data.cipher == "playfair")
+            {
+                decrypt_status = playfair_decryption(data.status, "door");
+            }
             console.log(decrypt_status);
             if (decrypt_status === "CLOSED") dev.classList.replace(opened, closed);
             else dev.classList.replace(closed, opened);
@@ -64,7 +72,8 @@ function register(deviceName) {
         method: 'POST',
         body: JSON.stringify({
             name: deviceName,
-            status: 'closed'
+            status: 'closed',
+            cipher: 'hill'
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -145,4 +154,3 @@ addDev.addEventListener('click', () => {
     if (inputValue) register(addInput.value);
     addInput.value = "";
 });
-
