@@ -106,7 +106,7 @@ def cipher_encryption(plain, key):
             encrypted_text = encrypted_text[:-1]
         end_time_test = time.time()
         execution_time = end_time_test - start_time_test
-        logging.info(logging.info(f"Hill cipher encryption took {execution_time:.6f} seconds."))
+        logging.info(f"Hill cipher encryption took {execution_time:.6f} seconds.")
         print("End of function")
         print(end_time_test)
         return encrypted_text
@@ -314,7 +314,7 @@ def playfair_encrypt(plain, key):
     end_time_test = time.time()
 
     execution_time = end_time_test - start_time_test
-    logging.info(logging.info(f"Playfair cipher encryption took {execution_time:.6f} seconds."))
+    logging.info(f"Playfair cipher encryption took {execution_time:.6f} seconds.")
 
     return encrypted_text
 
